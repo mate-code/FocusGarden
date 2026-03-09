@@ -25,23 +25,23 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        super.onCreate(savedInstanceState);     // call parent class method with current android state, like: textboxes etc.
 
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        binding = ActivityMainBinding.inflate(getLayoutInflater());     // load xml file (inflater) into object (binding)
+        setContentView(binding.getRoot());      // show on screen everything what main container (Root) contains
 
-        setSupportActionBar(binding.toolbar);
+        setSupportActionBar(binding.toolbar);   // tell android to treat toolbar as ActionBar, activate toolbar and its features
 
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-        appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);  // must be reach by ID because it is not a View object
+        appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();    // build navbar config
+        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);     // apply config into navbar
 
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAnchorView(R.id.fab)
-                        .setAction("Action", null).show();
+                Snackbar.make(view, "Replace with your own action !!!", Snackbar.LENGTH_LONG)
+                        .setAnchorView(R.id.fab)    // show snackbar above FAB button
+                        .setAction("Action", null).show();  // additional action inside snackbar (like unsend on email)
             }
         });
     }
