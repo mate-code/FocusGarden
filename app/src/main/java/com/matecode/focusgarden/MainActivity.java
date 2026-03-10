@@ -82,8 +82,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-        return NavigationUI.navigateUp(navController, appBarConfiguration)
-                || super.onSupportNavigateUp();
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);  // find existing navController (could be private var in class)
+        return NavigationUI.navigateUp(navController, appBarConfiguration)  // got back into previous fragment or
+                || super.onSupportNavigateUp();                             // return android default behaviour
     }
 }
