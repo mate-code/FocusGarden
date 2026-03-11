@@ -9,72 +9,74 @@
 
 
     <ProgressBar
-        android:id="@+id/progressBar"
+        android:id="@+id/pbFocusTimer"
         style="?android:attr/progressBarStyle"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        app:layout_constraintBottom_toTopOf="@+id/categoryBtn"
+        app:layout_constraintBottom_toTopOf="@+id/btnCategory"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/ivSelectedFlower"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="flowerImage"
         android:src="@drawable/ic_launcher_foreground"
         tools:layout_editor_absoluteY="200dp"
-        app:layout_constraintBottom_toBottomOf="@+id/progressBar"
-        app:layout_constraintEnd_toEndOf="@+id/progressBar"
-        app:layout_constraintStart_toStartOf="@+id/progressBar"
-        app:layout_constraintTop_toTopOf="@+id/progressBar" />
+        app:layout_constraintBottom_toBottomOf="@+id/pbFocusTimer"
+        app:layout_constraintEnd_toEndOf="@+id/pbFocusTimer"
+        app:layout_constraintStart_toStartOf="@+id/pbFocusTimer"
+        app:layout_constraintTop_toTopOf="@+id/pbFocusTimer" />
 
     <Button
-        android:id="@+id/categoryBtn"
+        android:id="@+id/btnCategory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Category"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTime"
-        app:layout_constraintEnd_toEndOf="@+id/progressBar"
-        app:layout_constraintStart_toStartOf="@+id/progressBar"
-        app:layout_constraintTop_toBottomOf="@+id/progressBar" />
+        app:layout_constraintBottom_toTopOf="@+id/tvFocusTime"
+        app:layout_constraintEnd_toEndOf="@+id/pbFocusTimer"
+        app:layout_constraintStart_toStartOf="@+id/pbFocusTimer"
+        app:layout_constraintTop_toBottomOf="@+id/pbFocusTimer" />
 
-    <EditText
-        android:id="@+id/editTextTime"
+    <TextView
+        android:id="@+id/tvFocusTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:autofillHints="00:25"
         android:ems="10"
-        android:hint="Specify focus time"
-        android:inputType="time"
+        android:text="00:25"
+        android:clickable="true"
+        android:focusable="true"
         android:minHeight="48dp"
         android:textColorHint="#8D6E63"
-        app:layout_constraintBottom_toTopOf="@+id/button1"
+        app:layout_constraintBottom_toTopOf="@+id/btnShowGarden"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/categoryBtn" />
+        app:layout_constraintTop_toBottomOf="@+id/btnCategory"
+        app:autoSizeTextType="uniform"/>
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/btnShowGarden"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Garden"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/button2"
+        app:layout_constraintEnd_toStartOf="@id/btnStartFocusTimer"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editTextTime" />
+        app:layout_constraintTop_toBottomOf="@id/tvFocusTime" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btnStartFocusTimer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Start"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toEndOf="@id/button1"
-        app:layout_constraintTop_toBottomOf="@id/editTextTime" />
+        app:layout_constraintStart_toEndOf="@id/btnShowGarden"
+        app:layout_constraintTop_toBottomOf="@id/tvFocusTime" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

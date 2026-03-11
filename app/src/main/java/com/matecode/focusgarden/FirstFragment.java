@@ -1,6 +1,7 @@
 package com.matecode.focusgarden;
 
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +29,10 @@ public class FirstFragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        binding.tvFocusTime.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);    // recenter textView with declared focus time
+
+
 
         //binding.buttonFirst.setOnClickListener(v ->
         //        NavHostFragment.findNavController(FirstFragment.this)
