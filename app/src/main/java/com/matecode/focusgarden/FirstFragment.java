@@ -61,6 +61,8 @@ public class FirstFragment extends Fragment {
             });
         });
 
+        binding.pbFocusTimer.setSecondaryProgress(100);     // set background ring to be fully filled
+
         binding.btnStartFocusTimer.setOnClickListener(v ->{
             int hour = picker.get().getHour();
             int minute = picker.get().getMinute();
