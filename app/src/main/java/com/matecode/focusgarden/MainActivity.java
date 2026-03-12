@@ -37,14 +37,6 @@ public class MainActivity extends AppCompatActivity {
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();    // build navbar config
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);     // apply config into navbar
 
-        binding.fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action !!!", Snackbar.LENGTH_LONG)
-                        .setAnchorView(R.id.fab)    // show snackbar above FAB button
-                        .setAction("Action", null).show();  // additional action inside snackbar (like unsend on email)
-            }
-        });
     }
 
     @Override

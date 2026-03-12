@@ -16,6 +16,7 @@ import com.google.android.material.timepicker.TimeFormat;
 import com.matecode.focusgarden.databinding.FragmentFirstBinding;
 
 import java.util.Locale;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class FirstFragment extends Fragment {
@@ -73,26 +74,18 @@ public class FirstFragment extends Fragment {
                 public void onTick(long ms) {
                     long h = ms / 1000 / 60 / 60 % 60;
                     long m = ms / 1000 / 60;
-                    binding.tvFocusTime.setText(String.format(Locale.US,"%02d:%02d", h, m));
+                    binding.tvFocusTime.setText(String.format(Locale.US,"%02d:%02d", h, m));    // temporary
 
                     long percentage = 100 - ms * 100 / milis;
                     binding.pbFocusTimer.setProgress((int)percentage, true);
-                    int sth = binding.pbFocusTimer.getProgress();
-
-
-                    //Toast.makeText(getParentFragment().getContext(), String.valueOf(binding.pbFocusTimer.getProgress()), Toast.LENGTH_SHORT).show();
                 }
 
                 public void onFinish() {
-                    Toast.makeText(getParentFragment().getContext(), "Finished !!!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireParentFragment().getContext(), "Finished !!!", Toast.LENGTH_SHORT).show();
                 }
             }.start();
         });
 
-        //binding.buttonFirst.setOnClickListener(v ->
-        //        NavHostFragment.findNavController(FirstFragment.this)
-        //                .navigate(R.id.action_FirstFragment_to_SecondFragment)
-        //);
     }
 
     @Override
