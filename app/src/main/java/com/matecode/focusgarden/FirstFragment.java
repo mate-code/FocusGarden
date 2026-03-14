@@ -86,7 +86,7 @@ public class FirstFragment extends Fragment {
 
 
 
-        binding.btnStartFocusTimer.setOnClickListener(v -> {
+        binding.btnStartFocusTimer.setOnClickListener(v -> {    // lambda expression to override a class
 
             Navigation.findNavController(v).navigate(R.id.action_FirstFragment_to_SecondFragment);
 
