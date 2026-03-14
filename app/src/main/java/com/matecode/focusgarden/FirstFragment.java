@@ -11,14 +11,13 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import com.google.android.material.timepicker.MaterialTimePicker;
 import com.google.android.material.timepicker.TimeFormat;
 import com.matecode.focusgarden.databinding.FragmentFirstBinding;
 
 import java.util.Locale;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.atomic.AtomicReferenceArray;
 import java.util.logging.Logger;
 
 public class FirstFragment extends Fragment {
@@ -88,6 +87,11 @@ public class FirstFragment extends Fragment {
 
 
         binding.btnStartFocusTimer.setOnClickListener(v -> {
+
+            Navigation.findNavController(v).navigate(R.id.action_FirstFragment_to_SecondFragment);
+
+/*
+
             int hour = tvGetTime(binding.tvFocusTime, 0);
             int minute = tvGetTime(binding.tvFocusTime, 1);
 
@@ -109,6 +113,7 @@ public class FirstFragment extends Fragment {
                 }
             }.start();
 
+ */
         });
 
 
