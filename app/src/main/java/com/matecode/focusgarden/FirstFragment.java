@@ -1,13 +1,11 @@
 package com.matecode.focusgarden;
 
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -62,7 +60,6 @@ public class FirstFragment extends Fragment {
 
         binding.tvFocusTime.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);    // recenter textView with declared focus time
 
-
         binding.tvFocusTime.setOnClickListener(v -> {   // define on click listener
             int hour = tvGetTime(binding.tvFocusTime, 0);
             int minute = tvGetTime(binding.tvFocusTime, 1);
@@ -88,43 +85,15 @@ public class FirstFragment extends Fragment {
         });
 
 
-
         binding.btnStartFocusTimer.setOnClickListener(v -> {    // lambda expression to override a class
             int hour = tvGetTime(binding.tvFocusTime, 0);
             int minute = tvGetTime(binding.tvFocusTime, 1);
 
             long ms = (hour * 60L + minute) * 60 * 1000;     // convert time from time picker into milliseconds
-            timerViewModel.setDeclaredTime(5000);
+            timerViewModel.setDeclaredTime(ms);
 
             Navigation.findNavController(v).navigate(R.id.action_FirstFragment_to_SecondFragment);
-
-/*
-
-            int hour = tvGetTime(binding.tvFocusTime, 0);
-            int minute = tvGetTime(binding.tvFocusTime, 1);
-
-            long milis = (hour * 60L + minute) * 60 * 1000;     // convert time from time picker into miliseconds
-
-            new CountDownTimer(milis, 1000) {
-                public void onTick(long ms) {
-                    long h = ms / (1000 * 60 * 60);
-                    long m = (ms / (1000 * 60)) % 60;
-                    long s = (ms / 1000) % 60;
-                    binding.tvFocusTime.setText(String.format(Locale.US,"%02d:%02d:%02d", h, m, s));    // temporary
-
-                    long percentage = 100 - ms * 100 / milis;
-                    binding.pbFocusTimer.setProgress((int)percentage, true);
-                }
-
-                public void onFinish() {
-                    Toast.makeText(requireParentFragment().getContext(), "Finished !!!", Toast.LENGTH_SHORT).show();
-                }
-            }.start();
-
- */
         });
-
-
 
     }
 

@@ -1,14 +1,8 @@
 package com.matecode.focusgarden;
 
-import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-
-import java.util.Locale;
 
 public class TimerViewModel extends ViewModel {
 
@@ -16,7 +10,6 @@ public class TimerViewModel extends ViewModel {
     private long declaredTime;
     private final MutableLiveData<Long> time = new MutableLiveData<>();
     private final MutableLiveData<Boolean> finished = new MutableLiveData<>();  // finish flag for timer
-
 
     public MutableLiveData<Long> getTime() { return time; }
     public void setDeclaredTime(long ms) { this.declaredTime = ms; }
