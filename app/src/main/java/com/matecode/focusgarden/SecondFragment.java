@@ -4,17 +4,22 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.matecode.focusgarden.databinding.FragmentSecondBinding;
 
+import java.util.Locale;
+
 public class SecondFragment extends Fragment {
 
     private FragmentSecondBinding binding;
+    TimerViewModel timerViewModel;
 
     @Override
     public View onCreateView(
@@ -22,6 +27,7 @@ public class SecondFragment extends Fragment {
             Bundle savedInstanceState
     ) {
 
+        timerViewModel = new ViewModelProvider(requireActivity()).get(TimerViewModel.class);
         binding = FragmentSecondBinding.inflate(inflater, container, false);
         return binding.getRoot();
 
@@ -33,10 +39,28 @@ public class SecondFragment extends Fragment {
         binding.btnStopFocusTimer.setOnClickListener(new View.OnClickListener() {   // anonymous class override
             @Override
             public void onClick(View view) {
+                timerViewModel.stopTimer();
                 Navigation.findNavController(view).navigate(R.id.action_SecondFragment_to_FirstFragment);
             }
         });
 
+        timerViewModel.getTime().observe(getViewLifecycleOwner(), time -> {
+            long h = time / (1000 * 60 * 60);
+            long m = (time / (1000 * 60)) % 60;
+            long s = (time / 1000) % 60;
+            binding.tvFocusTime.setText(String.format(Locale.US,"%02d:%02d:%02d", h, m, s));    // temporary
+
+            long percentage = 100 - time * 100 / timerViewModel.getDeclaredTime();
+            binding.pbFocusTimer.setProgress((int)percentage, true);
+
+            if (timerViewModel.getFinished()){
+                timerViewModel.stopTimer();
+                Toast.makeText(requireParentFragment().getContext(), "Great, new plant in your garden was born", Toast.LENGTH_LONG).show();
+                Navigation.findNavController(view).navigate(R.id.action_SecondFragment_to_FirstFragment);
+            }
+        });
+
+        timerViewModel.startTimer();
     }
 
     @Override

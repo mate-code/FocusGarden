@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import com.google.android.material.timepicker.MaterialTimePicker;
@@ -22,6 +23,7 @@ import java.util.logging.Logger;
 
 public class FirstFragment extends Fragment {
 
+    TimerViewModel timerViewModel;
     private FragmentFirstBinding binding;
     final Logger logger = Logger.getLogger(this.getClass().getName());
 
@@ -31,6 +33,7 @@ public class FirstFragment extends Fragment {
             Bundle savedInstanceState
     ) {
 
+        timerViewModel = new ViewModelProvider(requireActivity()).get(TimerViewModel.class);
         binding = FragmentFirstBinding.inflate(inflater, container, false);
         return binding.getRoot();
 
@@ -87,6 +90,11 @@ public class FirstFragment extends Fragment {
 
 
         binding.btnStartFocusTimer.setOnClickListener(v -> {    // lambda expression to override a class
+            int hour = tvGetTime(binding.tvFocusTime, 0);
+            int minute = tvGetTime(binding.tvFocusTime, 1);
+
+            long ms = (hour * 60L + minute) * 60 * 1000;     // convert time from time picker into milliseconds
+            timerViewModel.setDeclaredTime(5000);
 
             Navigation.findNavController(v).navigate(R.id.action_FirstFragment_to_SecondFragment);
 

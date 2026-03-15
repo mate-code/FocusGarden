@@ -54,6 +54,7 @@
         android:minHeight="48dp"
         android:height="98dp"
         android:textColorHint="#8D6E63"
+        android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/btnShowGarden"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
