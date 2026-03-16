@@ -95,6 +95,10 @@ public class FirstFragment extends Fragment {
             Navigation.findNavController(v).navigate(R.id.action_FirstFragment_to_SecondFragment);
         });
 
+        binding.btnShowGarden.setOnClickListener(v -> {
+            Navigation.findNavController(v).navigate(R.id.action_FirstFragment_to_GardenFragment);
+        });
+
     }
 
     @Override

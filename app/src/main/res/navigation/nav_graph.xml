@@ -14,7 +14,12 @@
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
             app:destination="@id/SecondFragment" />
+
+        <action
+            android:id="@+id/action_FirstFragment_to_GardenFragment"
+            app:destination="@id/GardenFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/SecondFragment"
         android:name="com.matecode.focusgarden.SecondFragment"
@@ -24,5 +29,12 @@
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/GardenFragment"
+        android:name="com.matecode.focusgarden.GardenFragment"
+        android:label="@string/garden_fragment_label"
+        tools:layout="@layout/fragment_garden">
     </fragment>
 </navigation>
