@@ -59,16 +59,6 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
 
-        if (id == R.id.action_more) {
-            Toast.makeText(this, "coming soon !!!", Toast.LENGTH_SHORT).show();
-            return true;
-        }
-
-        if (id == R.id.action_help) {
-            Toast.makeText(this, "Help me :(", Toast.LENGTH_LONG).show();
-            return true;
-        }
-
         return super.onOptionsItemSelected(item);
     }
 
