@@ -18,6 +18,10 @@
         <action
             android:id="@+id/action_FirstFragment_to_GardenFragment"
             app:destination="@id/GardenFragment" />
+
+        <action
+            android:id="@+id/action_FirstFragment_to_CategoryFragment"
+            app:destination="@id/CategoryFragment" />
     </fragment>
 
     <fragment
@@ -37,4 +41,12 @@
         android:label="@string/garden_fragment_label"
         tools:layout="@layout/fragment_garden">
     </fragment>
+
+    <fragment
+        android:id="@+id/CategoryFragment"
+        android:name="com.matecode.focusgarden.CategoryFragment"
+        android:label="@string/category_fragment_label"
+        tools:label="@layout/fragment_category">
+    </fragment>
+
 </navigation>

@@ -99,6 +99,12 @@ public class FirstFragment extends Fragment {
             Navigation.findNavController(v).navigate(R.id.action_FirstFragment_to_GardenFragment);
         });
 
+        binding.btnCategory.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.action_FirstFragment_to_CategoryFragment);
+            }
+        });
     }
 
     @Override
