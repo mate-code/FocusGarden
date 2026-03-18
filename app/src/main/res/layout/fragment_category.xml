@@ -6,16 +6,6 @@
     android:layout_height="match_parent">
 
     <Button
-        android:id="@+id/btnSelect"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/action_select_category"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerView"
-        app:layout_constraintBottom_toTopOf="@+id/btnNewCategory"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btnBack"/>
-
-    <Button
         android:id="@+id/btnBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -26,14 +16,34 @@
         app:layout_constraintEnd_toStartOf="@+id/btnSelect"/>
 
     <Button
+        android:id="@+id/btnSelect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/action_select_category"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerView"
+        app:layout_constraintBottom_toTopOf="@+id/btnNewCategory"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnBack"/>
+
+    <Button
         android:id="@+id/btnNewCategory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/action_create_new_category"
-        app:layout_constraintTop_toBottomOf="@+id/btnSelect"
+        app:layout_constraintTop_toBottomOf="@+id/btnBack"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toStartOf="@+id/btnUpdateCategory"/>
+
+    <Button
+        android:id="@+id/btnUpdateCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/action_update_category"
+        app:layout_constraintTop_toBottomOf="@+id/btnSelect"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnNewCategory"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
