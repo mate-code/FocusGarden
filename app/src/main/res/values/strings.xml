@@ -6,6 +6,9 @@
     <string name="action_stop_timer">STOP</string>
     <string name="action_category">Category</string>
     <string name="default_focus_time">00:25</string>
+    <string name="action_select_category">Select</string>
+    <string name="action_back">BACK</string>
+    <string name="action_create_new_category">New Category</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
