@@ -3,6 +3,7 @@ package com.matecode.focusgarden;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,6 +14,7 @@ import java.util.List;
 public class CategoryFragmentToCategoryItemAdapter extends RecyclerView.Adapter<CategoryFragmentToCategoryItemAdapter.ViewHolder> {
 
     private List<String> localDataSet;
+    private int selectedState = -1;
 
     /**
      * Provide a reference to the type of views that you are using
@@ -20,17 +22,18 @@ public class CategoryFragmentToCategoryItemAdapter extends RecyclerView.Adapter<
      */
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView textView;
+        private final RadioButton radioButton;
 
         public ViewHolder(View view) {
             super(view);
             // Define click listener for the ViewHolder's View
 
             textView = (TextView) view.findViewById(R.id.tvCategoryName);
+            radioButton = (RadioButton) view.findViewById(R.id.rbtnCategory);
         }
 
-        public TextView getTextView() {
-            return textView;
-        }
+        public TextView getTextView() { return textView; }
+        public RadioButton getRadioButton() { return radioButton; }
     }
 
     /**
@@ -61,6 +64,16 @@ public class CategoryFragmentToCategoryItemAdapter extends RecyclerView.Adapter<
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
         viewHolder.getTextView().setText(localDataSet.get(position));
+        viewHolder.getRadioButton().setChecked(position == selectedState);
+        viewHolder.getRadioButton().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int prevPosition = selectedState;
+                selectedState = viewHolder.getBindingAdapterPosition();
+                notifyItemChanged(prevPosition);
+                notifyItemChanged(selectedState);
+            }
+        });
     }
 
     // Return the size of your dataset (invoked by the layout manager)
