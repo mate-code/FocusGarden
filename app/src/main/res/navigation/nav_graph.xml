@@ -47,6 +47,10 @@
         android:name="com.matecode.focusgarden.CategoryFragment"
         android:label="@string/category_fragment_label"
         tools:label="@layout/fragment_category">
+
+            <action
+                android:id="@+id/action_CategoryFragment_to_FirstFragment"
+                app:destination="@+id/FirstFragment" />
     </fragment>
 
 </navigation>

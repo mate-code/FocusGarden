@@ -14,7 +14,7 @@ import java.util.List;
 public class CategoryFragmentToCategoryItemAdapter extends RecyclerView.Adapter<CategoryFragmentToCategoryItemAdapter.ViewHolder> {
 
     private List<String> localDataSet;
-    private int selectedState = -1;
+    private int selectedItem = -1;
 
     /**
      * Provide a reference to the type of views that you are using
@@ -64,14 +64,14 @@ public class CategoryFragmentToCategoryItemAdapter extends RecyclerView.Adapter<
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
         viewHolder.getTextView().setText(localDataSet.get(position));
-        viewHolder.getRadioButton().setChecked(position == selectedState);
+        viewHolder.getRadioButton().setChecked(position == selectedItem);
         viewHolder.getRadioButton().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int prevPosition = selectedState;
-                selectedState = viewHolder.getBindingAdapterPosition();
+                int prevPosition = selectedItem;
+                selectedItem = viewHolder.getBindingAdapterPosition();
                 notifyItemChanged(prevPosition);
-                notifyItemChanged(selectedState);
+                notifyItemChanged(selectedItem);
             }
         });
     }
@@ -81,4 +81,5 @@ public class CategoryFragmentToCategoryItemAdapter extends RecyclerView.Adapter<
     public int getItemCount() {
         return localDataSet.size();
     }
+    public int getSelectedItem() { return selectedItem; }
 }
