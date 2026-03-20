@@ -25,7 +25,7 @@ public class CategoryFragmentToCategoryItemAdapter extends RecyclerView.Adapter<
             super(view);
             // Define click listener for the ViewHolder's View
 
-            textView = (TextView) view.findViewById(R.id.textView);
+            textView = (TextView) view.findViewById(R.id.tvCategoryName);
         }
 
         public TextView getTextView() {

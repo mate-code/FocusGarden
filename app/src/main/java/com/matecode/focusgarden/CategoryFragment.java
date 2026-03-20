@@ -30,8 +30,8 @@ public class CategoryFragment extends Fragment {
         List<String> data = Arrays.asList("Card 1", "Card 2", "Card 3");
 
         CategoryFragmentToCategoryItemAdapter adapter = new CategoryFragmentToCategoryItemAdapter(data);
-        binding.recyclerView.setLayoutManager(new LinearLayoutManager(requireParentFragment().getContext()));
-        binding.recyclerView.setAdapter(adapter);
+        binding.rvCategory.setLayoutManager(new LinearLayoutManager(requireParentFragment().getContext()));
+        binding.rvCategory.setAdapter(adapter);
     }
 
 }
