@@ -7,8 +7,12 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.matecode.focusgarden.databinding.FragmentCategoryBinding;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class CategoryFragment extends Fragment {
 
@@ -23,7 +27,11 @@ public class CategoryFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        List<String> data = Arrays.asList("Card 1", "Card 2", "Card 3");
 
+        CategoryFragmentToCategoryItemAdapter adapter = new CategoryFragmentToCategoryItemAdapter(data);
+        binding.recyclerView.setLayoutManager(new LinearLayoutManager(requireParentFragment().getContext()));
+        binding.recyclerView.setAdapter(adapter);
     }
 
 }
