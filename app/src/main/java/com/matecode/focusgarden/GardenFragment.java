@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import com.matecode.focusgarden.databinding.FragmentGardenBinding;
 
@@ -22,8 +23,8 @@ public class GardenFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         binding = FragmentGardenBinding.inflate(inflater, container, false);
 
-        ConstraintLayout grid = binding.getRoot();
-        int rowNum = 10;
+        ConstraintLayout grid = binding.svGarden.findViewById(R.id.clGarden);
+        int rowNum = 20;
         int colNum = 6;
 
         ImageView[][] ivg = new ImageView[rowNum][colNum];
@@ -47,6 +48,9 @@ public class GardenFragment extends Fragment {
                 if (col == 0) { params.startToStart = ConstraintLayout.LayoutParams.PARENT_ID; }
                 else { params.startToEnd = ivg[row][col - 1].getId(); }
 
+                //if (col == colNum - 1) { params.endToEnd = ConstraintLayout.LayoutParams.PARENT_ID; }
+                //params.horizontalChainStyle = ConstraintLayout.LayoutParams.CHAIN_SPREAD;
+
                 iv.setLayoutParams(params);
                 ivg[row][col] = iv;
                 grid.addView(iv);
@@ -58,7 +62,12 @@ public class GardenFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
-
+        binding.btnBack.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Navigation.findNavController(view).navigate(R.id.action_GardenFragment_to_FirstFragment);
+            }
+        });
     }
 
 }
