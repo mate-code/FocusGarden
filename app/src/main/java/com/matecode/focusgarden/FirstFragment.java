@@ -8,7 +8,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
@@ -21,7 +23,8 @@ import java.util.logging.Logger;
 
 public class FirstFragment extends Fragment {
 
-    TimerViewModel timerViewModel;
+    private TimerViewModel timerViewModel;
+    private CategoryViewModel selectedCategory;
     private FragmentFirstBinding binding;
     final Logger logger = Logger.getLogger(this.getClass().getName());
 
@@ -32,6 +35,7 @@ public class FirstFragment extends Fragment {
     ) {
 
         timerViewModel = new ViewModelProvider(requireActivity()).get(TimerViewModel.class);
+        selectedCategory = new ViewModelProvider(requireActivity()).get(CategoryViewModel.class);
         binding = FragmentFirstBinding.inflate(inflater, container, false);
         return binding.getRoot();
 
@@ -99,6 +103,20 @@ public class FirstFragment extends Fragment {
             Navigation.findNavController(v).navigate(R.id.action_FirstFragment_to_GardenFragment);
         });
 
+        binding.btnCategory.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.action_FirstFragment_to_CategoryFragment);
+            }
+        });
+
+        final Observer<String> categoryViewModelObserver = new Observer<String>() {
+            @Override
+            public void onChanged(@Nullable final String s) {
+                binding.btnCategory.setText(s);
+            }
+        };
+        selectedCategory.getSelectedCategory().observe(getViewLifecycleOwner(), categoryViewModelObserver);
     }
 
     @Override
