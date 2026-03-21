@@ -35,7 +35,7 @@ public class CategoryFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
-        List<String> data = Arrays.asList("Card 1", "Card 2", "Card 3");
+        List<String> data = Arrays.asList("Work", "Study", "Fun");      // It should be load from Phone memory or from Cloud DB
 
         CategoryFragmentToCategoryItemAdapter adapter = new CategoryFragmentToCategoryItemAdapter(data);
         binding.rvCategory.setLayoutManager(new LinearLayoutManager(requireParentFragment().getContext()));

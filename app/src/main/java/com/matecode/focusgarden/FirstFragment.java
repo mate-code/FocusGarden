@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,8 +23,8 @@ import java.util.logging.Logger;
 
 public class FirstFragment extends Fragment {
 
-    TimerViewModel timerViewModel;
-    CategoryViewModel selectedCategory;
+    private TimerViewModel timerViewModel;
+    private CategoryViewModel selectedCategory;
     private FragmentFirstBinding binding;
     final Logger logger = Logger.getLogger(this.getClass().getName());
 

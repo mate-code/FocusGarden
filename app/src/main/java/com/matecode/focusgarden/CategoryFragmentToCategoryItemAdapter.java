@@ -13,7 +13,7 @@ import java.util.List;
 
 public class CategoryFragmentToCategoryItemAdapter extends RecyclerView.Adapter<CategoryFragmentToCategoryItemAdapter.ViewHolder> {
 
-    private List<String> localDataSet;
+    private final List<String> localDataSet;
     private int selectedItem = -1;
 
     /**
@@ -42,9 +42,7 @@ public class CategoryFragmentToCategoryItemAdapter extends RecyclerView.Adapter<
      * @param dataSet String[] containing the data to populate views to be used
      * by RecyclerView
      */
-    public CategoryFragmentToCategoryItemAdapter(List<String> dataSet) {
-        localDataSet = dataSet;
-    }
+    public CategoryFragmentToCategoryItemAdapter(List<String> dataSet) { localDataSet = dataSet; }
 
     // Create new views (invoked by the layout manager)
     @NonNull
@@ -65,6 +63,7 @@ public class CategoryFragmentToCategoryItemAdapter extends RecyclerView.Adapter<
         // contents of the view with that element
         viewHolder.getTextView().setText(localDataSet.get(position));
         viewHolder.getRadioButton().setChecked(position == selectedItem);
+
         viewHolder.getRadioButton().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -78,8 +77,6 @@ public class CategoryFragmentToCategoryItemAdapter extends RecyclerView.Adapter<
 
     // Return the size of your dataset (invoked by the layout manager)
     @Override
-    public int getItemCount() {
-        return localDataSet.size();
-    }
+    public int getItemCount() { return localDataSet.size(); }
     public int getSelectedItem() { return selectedItem; }
 }
