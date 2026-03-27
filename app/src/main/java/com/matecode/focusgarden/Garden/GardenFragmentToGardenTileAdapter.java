@@ -1,4 +1,4 @@
-package com.matecode.focusgarden;
+package com.matecode.focusgarden.Garden;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -6,6 +6,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.matecode.focusgarden.R;
 
 import java.util.List;
 

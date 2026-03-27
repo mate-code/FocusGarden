@@ -1,4 +1,4 @@
-package com.matecode.focusgarden;
+package com.matecode.focusgarden.Garden;
 
 import android.graphics.Rect;
 import android.view.View;

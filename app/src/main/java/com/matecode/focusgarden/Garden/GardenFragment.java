@@ -1,4 +1,4 @@
-package com.matecode.focusgarden;
+package com.matecode.focusgarden.Garden;
 
 import android.os.Bundle;
 import android.util.TypedValue;
@@ -12,6 +12,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.matecode.focusgarden.R;
 import com.matecode.focusgarden.databinding.FragmentGardenBinding;
 
 import java.util.ArrayList;

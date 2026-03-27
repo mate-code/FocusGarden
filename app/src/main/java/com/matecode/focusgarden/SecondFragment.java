@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
+import com.matecode.focusgarden.Category.CategoryViewModel;
 import com.matecode.focusgarden.databinding.FragmentSecondBinding;
 
 import java.util.Locale;

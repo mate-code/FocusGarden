@@ -37,7 +37,7 @@
 
     <fragment
         android:id="@+id/GardenFragment"
-        android:name="com.matecode.focusgarden.GardenFragment"
+        android:name="com.matecode.focusgarden.Garden.GardenFragment"
         android:label="@string/garden_fragment_label"
         tools:layout="@layout/fragment_garden">
 
@@ -48,7 +48,7 @@
 
     <fragment
         android:id="@+id/CategoryFragment"
-        android:name="com.matecode.focusgarden.CategoryFragment"
+        android:name="com.matecode.focusgarden.Category.CategoryFragment"
         android:label="@string/category_fragment_label"
         tools:label="@layout/fragment_category">
 
