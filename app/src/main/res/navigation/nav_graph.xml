@@ -40,6 +40,10 @@
         android:name="com.matecode.focusgarden.GardenFragment"
         android:label="@string/garden_fragment_label"
         tools:layout="@layout/fragment_garden">
+
+        <action
+            android:id="@+id/action_GardenFragment_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
     </fragment>
 
     <fragment
