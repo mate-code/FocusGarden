@@ -7,7 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,24 +24,33 @@ import java.util.List;
 public class GardenFragment extends Fragment {
 
     private FragmentGardenBinding binding;
+    private GardenViewModel gardenMap;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+        int colCount = 6;
+        int rowCount = 20;
+
+        GardenViewModelFactory factory = new GardenViewModelFactory(rowCount, colCount);    // create factory to define size of gardenMap
+        gardenMap = new ViewModelProvider(requireActivity(), factory).get(GardenViewModel.class);
+
         binding = FragmentGardenBinding.inflate(inflater, container, false);
 
         RecyclerView recyclerView = binding.recyclerView;
-        int colCount = 6;
 
         GridLayoutManager layoutManager = new GridLayoutManager(requireContext().getApplicationContext(), colCount);
         recyclerView.setLayoutManager(layoutManager);
 
-        List<String> data = new ArrayList<>();
-        for (int i = 1; i <= 120; i++) {
-            data.add("Tile " + i);
-        }
-
-        GardenFragmentToGardenTileAdapter adapter = new GardenFragmentToGardenTileAdapter(data);
+        GardenFragmentToGardenTileAdapter adapter = new GardenFragmentToGardenTileAdapter(gardenMap);
         recyclerView.setAdapter(adapter);
+
+        gardenMap.getPositionToPlant().observe(getViewLifecycleOwner(), position -> {
+            if (position != null) {
+                GardenTileData tile = gardenMap.getGardenMap().get(position);
+                tile.setStatus(gardenMap.getPlantStatus()); // set new status
+                adapter.notifyItemChanged(position); // refresh that tile in RecyclerView
+            }
+        });
 
         int spacingInDp = 8;
         int spacingInPx = (int) TypedValue.applyDimension(

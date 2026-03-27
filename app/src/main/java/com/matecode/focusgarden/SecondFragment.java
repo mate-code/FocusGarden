@@ -12,15 +12,20 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import com.matecode.focusgarden.Category.CategoryViewModel;
+import com.matecode.focusgarden.Garden.GardenTileStatusEnum;
+import com.matecode.focusgarden.Garden.GardenViewModel;
+import com.matecode.focusgarden.Garden.GardenViewModelFactory;
 import com.matecode.focusgarden.databinding.FragmentSecondBinding;
 
 import java.util.Locale;
+import java.util.Random;
 
 public class SecondFragment extends Fragment {
 
     private FragmentSecondBinding binding;
     private TimerViewModel timerViewModel;
     private CategoryViewModel selectedCategory;
+    private GardenViewModel gardenViewModel;
 
     @Override
     public View onCreateView(
@@ -30,6 +35,11 @@ public class SecondFragment extends Fragment {
 
         timerViewModel = new ViewModelProvider(requireActivity()).get(TimerViewModel.class);
         selectedCategory = new ViewModelProvider(requireActivity()).get(CategoryViewModel.class);
+        int colCount = 6;
+        int rowCount = 20;
+        GardenViewModelFactory factory = new GardenViewModelFactory(rowCount, colCount);    // create factory to define size of gardenMap
+        gardenViewModel = new ViewModelProvider(requireActivity(), factory).get(GardenViewModel.class);
+
         binding = FragmentSecondBinding.inflate(inflater, container, false);
         return binding.getRoot();
 
@@ -44,6 +54,12 @@ public class SecondFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 timerViewModel.stopTimer();
+
+                gardenViewModel.setPlantStatus(GardenTileStatusEnum.DEAD);
+                Random random = new Random();
+                int position = random.nextInt(gardenViewModel.getSize());
+                gardenViewModel.setPositionToPlant(position);
+
                 Navigation.findNavController(view).navigate(R.id.action_SecondFragment_to_FirstFragment);
             }
         });
@@ -57,9 +73,16 @@ public class SecondFragment extends Fragment {
             long percentage = 100 - time * 100 / timerViewModel.getDeclaredTime();
             binding.pbFocusTimer.setProgress((int)percentage, true);
 
+            // If Timer was finished show Toast communicate, add new plant into garden and navigate to Base App View
             if (timerViewModel.getFinished()){
                 timerViewModel.stopTimer();
                 Toast.makeText(requireParentFragment().getContext(), "Great, new plant in your garden was born", Toast.LENGTH_LONG).show();
+
+                gardenViewModel.setPlantStatus(GardenTileStatusEnum.LIVE);
+                Random random = new Random();
+                int position = random.nextInt(gardenViewModel.getSize());
+                gardenViewModel.setPositionToPlant(position);
+
                 Navigation.findNavController(view).navigate(R.id.action_SecondFragment_to_FirstFragment);
             }
         });
