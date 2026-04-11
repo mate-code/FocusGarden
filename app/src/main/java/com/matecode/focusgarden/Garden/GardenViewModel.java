@@ -1,13 +1,9 @@
 package com.matecode.focusgarden.Garden;
 
-import android.graphics.Point;
-
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -23,6 +19,7 @@ public class GardenViewModel extends ViewModel {
 
     public GardenViewModel(int rows, int cols) {
         positionToPlant.setValue(0);
+        plantStatus = GardenTileStatusEnum.EMPTY;
         
         this.rows = rows;
         this.cols = cols;
