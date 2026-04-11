@@ -58,6 +58,7 @@ public class SecondFragment extends Fragment {
                 gardenViewModel.setPlantStatus(GardenTileStatusEnum.DEAD);
                 Random random = new Random();
                 int position = random.nextInt(gardenViewModel.getSize());
+                gardenViewModel.increaseOccupated();
                 gardenViewModel.setPositionToPlant(position);
 
                 Navigation.findNavController(view).navigate(R.id.action_SecondFragment_to_FirstFragment);
@@ -81,6 +82,7 @@ public class SecondFragment extends Fragment {
                 gardenViewModel.setPlantStatus(GardenTileStatusEnum.LIVE);
                 Random random = new Random();
                 int position = random.nextInt(gardenViewModel.getSize());
+                gardenViewModel.increaseOccupated();
                 gardenViewModel.setPositionToPlant(position);
 
                 Navigation.findNavController(view).navigate(R.id.action_SecondFragment_to_FirstFragment);

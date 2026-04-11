@@ -9,6 +9,7 @@ import java.util.Random;
 
 public class GardenViewModel extends ViewModel {
     private List<GardenTileData> gardenMap;
+    private int occupated;
 
     private final MutableLiveData<Integer> positionToPlant = new MutableLiveData<Integer>();
 
@@ -34,7 +35,7 @@ public class GardenViewModel extends ViewModel {
 
         for (int i = 0; i < size; i++) {
             //GardenTileStatusEnum randomTile = values[random.nextInt(values.length)];
-            gardenMap.add(new GardenTileData(i, GardenTileStatusEnum.EMPTY));
+            gardenMap.add(new GardenTileData(GardenTileStatusEnum.EMPTY));
         }
     }
 
@@ -63,5 +64,17 @@ public class GardenViewModel extends ViewModel {
 
     public List<GardenTileData> getGardenMap() {
         return this.gardenMap;
+    }
+
+    public boolean isFull() {
+        return occupated == gardenMap.size();
+    }
+
+    public int getOccupatedStatus() {
+        return occupated;
+    }
+
+    public void increaseOccupated() {
+        occupated += 1;
     }
 }

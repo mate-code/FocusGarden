@@ -14,9 +14,11 @@ import com.matecode.focusgarden.R;
 public class GardenFragmentToGardenTileAdapter extends RecyclerView.Adapter<GardenFragmentToGardenTileAdapter.ViewHolder> {
 
     private final GardenViewModel data;
+    private int ocupatedViewHolders;
 
     public GardenFragmentToGardenTileAdapter(GardenViewModel data) {
         this.data = data;
+        ocupatedViewHolders = 0;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -40,13 +42,11 @@ public class GardenFragmentToGardenTileAdapter extends RecyclerView.Adapter<Gard
     // it is very good for memory usage and efficiency
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Log.println(Log.ERROR, "sth", String.valueOf(position));
-
-        // TODO cannot use position from onBindViewHolder as data list indexer, because during scroll it will generates imgs in new places
         GardenTileStatusEnum status = data.getGardenMap().get(position).getStatus();
 
         switch (status) {
             case EMPTY:
+                holder.imageView.setImageDrawable(null);
                 break;
             case LIVE:
                 holder.imageView.setImageResource(android.R.drawable.btn_star_big_on);

@@ -7,9 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -17,9 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.matecode.focusgarden.R;
 import com.matecode.focusgarden.databinding.FragmentGardenBinding;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class GardenFragment extends Fragment {
 
