@@ -1,8 +1,6 @@
-package com.matecode.focusgarden;
+package com.matecode.focusgarden.Category;
 
-import androidx.annotation.Nullable;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 
 public class CategoryViewModel extends ViewModel {
