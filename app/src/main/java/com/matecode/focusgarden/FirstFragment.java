@@ -30,16 +30,9 @@ public class FirstFragment extends Fragment {
     final Logger logger = Logger.getLogger(this.getClass().getName());
 
     @Override
-    public View onCreateView(
-            @NonNull LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState
-    ) {
-
-        timerViewModel = new ViewModelProvider(requireActivity()).get(TimerViewModel.class);
-        selectedCategory = new ViewModelProvider(requireActivity()).get(CategoryViewModel.class);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentFirstBinding.inflate(inflater, container, false);
         return binding.getRoot();
-
     }
 
     private int tvGetTime(TextView tv, int index) {
@@ -57,6 +50,10 @@ public class FirstFragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        timerViewModel = new ViewModelProvider(requireActivity()).get(TimerViewModel.class);
+        selectedCategory = new ViewModelProvider(requireActivity()).get(CategoryViewModel.class);
+
 
         binding.pbFocusTimer.setIndeterminate(false);
         binding.pbFocusTimer.setMax(100);
