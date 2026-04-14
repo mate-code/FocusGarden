@@ -11,14 +11,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.matecode.focusgarden.R;
 
+import java.util.List;
+
 public class GardenFragmentToGardenTileAdapter extends RecyclerView.Adapter<GardenFragmentToGardenTileAdapter.ViewHolder> {
 
-    private final GardenViewModel data;
-    private int ocupatedViewHolders;
+    List<GardenTileData> data;
 
-    public GardenFragmentToGardenTileAdapter(GardenViewModel data) {
+    public void setItems(List<GardenTileData> data) {
         this.data = data;
-        ocupatedViewHolders = 0;
+        notifyDataSetChanged();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -41,8 +42,10 @@ public class GardenFragmentToGardenTileAdapter extends RecyclerView.Adapter<Gard
     // onBindViewHolder calls when scroll is moving, then deletes old tiles and creating new ones instead at once creating all needed tiles
     // it is very good for memory usage and efficiency
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        GardenTileStatusEnum status = data.getGardenMap().get(position).getStatus();
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        GardenTileStatusEnum status = data.get(position).getStatus();
+
+        Log.println(Log.DEBUG, "Adapter.onBindViewHolder", "status: " + String.valueOf(status));
 
         switch (status) {
             case EMPTY:
@@ -59,11 +62,10 @@ public class GardenFragmentToGardenTileAdapter extends RecyclerView.Adapter<Gard
                 break;
         }
 
-
     }
 
     @Override
     public int getItemCount() {
-        return data.getSize();
+        return data.size();
     }
 }

@@ -24,7 +24,7 @@ public class GardenFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         int colCount = 6;
-        int rowCount = 20;
+        int rowCount = 1;
 
         GardenViewModelFactory factory = new GardenViewModelFactory(rowCount, colCount);    // create factory to define size of gardenMap
         gardenMap = new ViewModelProvider(requireActivity(), factory).get(GardenViewModel.class);
@@ -36,15 +36,11 @@ public class GardenFragment extends Fragment {
         GridLayoutManager layoutManager = new GridLayoutManager(requireContext().getApplicationContext(), colCount);
         recyclerView.setLayoutManager(layoutManager);
 
-        GardenFragmentToGardenTileAdapter adapter = new GardenFragmentToGardenTileAdapter(gardenMap);
+        GardenFragmentToGardenTileAdapter adapter = new GardenFragmentToGardenTileAdapter();
         recyclerView.setAdapter(adapter);
 
-        gardenMap.getPositionToPlant().observe(getViewLifecycleOwner(), position -> {
-            if (position != null) {
-                GardenTileData tile = gardenMap.getGardenMap().get(position);
-                tile.setStatus(gardenMap.getPlantStatus()); // set new status
-                adapter.notifyItemChanged(position); // refresh that tile in RecyclerView
-            }
+        gardenMap.getGardenMapForObservers().observe(getViewLifecycleOwner(), gardenMapList -> {
+            adapter.setItems(gardenMapList); // refresh that tile in RecyclerView
         });
 
         int spacingInDp = 8;
