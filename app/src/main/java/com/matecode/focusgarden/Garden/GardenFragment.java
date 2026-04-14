@@ -23,12 +23,17 @@ public class GardenFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+        binding = FragmentGardenBinding.inflate(inflater, container, false);
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
         GardenViewModelFactory factory = new GardenViewModelFactory();    // create factory to define size of gardenMap
         gardenViewModel = new ViewModelProvider(requireActivity(), factory).get(GardenViewModel.class);
         int colCount = gardenViewModel.getCols();
-
-        binding = FragmentGardenBinding.inflate(inflater, container, false);
 
         RecyclerView recyclerView = binding.recyclerView;
 
@@ -37,10 +42,6 @@ public class GardenFragment extends Fragment {
 
         GardenFragmentToGardenTileAdapter adapter = new GardenFragmentToGardenTileAdapter();
         recyclerView.setAdapter(adapter);
-
-        gardenViewModel.getGardenMapForObservers().observe(getViewLifecycleOwner(), gardenMapList -> {
-            adapter.setItems(gardenMapList); // refresh that tile in RecyclerView
-        });
 
         int spacingInDp = 8;
         int spacingInPx = (int) TypedValue.applyDimension(
@@ -51,17 +52,18 @@ public class GardenFragment extends Fragment {
 
         recyclerView.addItemDecoration(new GridSpacingItemDecoration(colCount, spacingInPx, true));
 
-        return binding.getRoot();
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         binding.btnBack.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
                 Navigation.findNavController(view).navigate(R.id.action_GardenFragment_to_FirstFragment);
             }
         });
+
+
+        gardenViewModel.getGardenMapForObservers().observe(getViewLifecycleOwner(), gardenMapList -> {
+            adapter.setItems(gardenMapList); // refresh that tile in RecyclerView
+        });
+
     }
 
 }
