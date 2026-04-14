@@ -19,15 +19,14 @@ import com.matecode.focusgarden.databinding.FragmentGardenBinding;
 public class GardenFragment extends Fragment {
 
     private FragmentGardenBinding binding;
-    private GardenViewModel gardenMap;
+    private GardenViewModel gardenViewModel;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        int colCount = 6;
-        int rowCount = 1;
 
-        GardenViewModelFactory factory = new GardenViewModelFactory(rowCount, colCount);    // create factory to define size of gardenMap
-        gardenMap = new ViewModelProvider(requireActivity(), factory).get(GardenViewModel.class);
+        GardenViewModelFactory factory = new GardenViewModelFactory();    // create factory to define size of gardenMap
+        gardenViewModel = new ViewModelProvider(requireActivity(), factory).get(GardenViewModel.class);
+        int colCount = gardenViewModel.getCols();
 
         binding = FragmentGardenBinding.inflate(inflater, container, false);
 
@@ -39,7 +38,7 @@ public class GardenFragment extends Fragment {
         GardenFragmentToGardenTileAdapter adapter = new GardenFragmentToGardenTileAdapter();
         recyclerView.setAdapter(adapter);
 
-        gardenMap.getGardenMapForObservers().observe(getViewLifecycleOwner(), gardenMapList -> {
+        gardenViewModel.getGardenMapForObservers().observe(getViewLifecycleOwner(), gardenMapList -> {
             adapter.setItems(gardenMapList); // refresh that tile in RecyclerView
         });
 

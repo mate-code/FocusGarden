@@ -36,9 +36,7 @@ public class SecondFragment extends Fragment {
         timerViewModel = new ViewModelProvider(requireActivity()).get(TimerViewModel.class);
         selectedCategory = new ViewModelProvider(requireActivity()).get(CategoryViewModel.class);
 
-        int colCount = 6;
-        int rowCount = 1;
-        GardenViewModelFactory factory = new GardenViewModelFactory(rowCount, colCount);    // create factory to define size of gardenMap
+        GardenViewModelFactory factory = new GardenViewModelFactory();    // create factory to define size of gardenMap
         gardenViewModel = new ViewModelProvider(requireActivity(), factory).get(GardenViewModel.class);
 
         binding = FragmentSecondBinding.inflate(inflater, container, false);
