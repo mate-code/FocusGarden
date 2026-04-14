@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 import android.util.Log;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -46,6 +47,18 @@ public class SecondFragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        // Stop shared timer (shared between fragments) when user click on android phone back button
+        requireActivity().getOnBackPressedDispatcher().addCallback(
+            getViewLifecycleOwner(),
+            new OnBackPressedCallback(true) {
+                @Override
+                public void handleOnBackPressed() {
+                    timerViewModel.stopTimer();
+                    requireActivity().getSupportFragmentManager().popBackStack();
+                }
+            }
+        );
 
         binding.btnCategory.setText(selectedCategory.getSelectedCategory().getValue());
 
