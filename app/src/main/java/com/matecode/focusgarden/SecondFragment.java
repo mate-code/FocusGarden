@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -18,7 +19,6 @@ import com.matecode.focusgarden.Garden.GardenViewModelFactory;
 import com.matecode.focusgarden.databinding.FragmentSecondBinding;
 
 import java.util.Locale;
-import java.util.Random;
 
 public class SecondFragment extends Fragment {
 
@@ -35,14 +35,15 @@ public class SecondFragment extends Fragment {
 
         timerViewModel = new ViewModelProvider(requireActivity()).get(TimerViewModel.class);
         selectedCategory = new ViewModelProvider(requireActivity()).get(CategoryViewModel.class);
+
         int colCount = 6;
-        int rowCount = 20;
+        int rowCount = 1;
         GardenViewModelFactory factory = new GardenViewModelFactory(rowCount, colCount);    // create factory to define size of gardenMap
         gardenViewModel = new ViewModelProvider(requireActivity(), factory).get(GardenViewModel.class);
 
         binding = FragmentSecondBinding.inflate(inflater, container, false);
-        return binding.getRoot();
 
+        return binding.getRoot();
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
@@ -55,11 +56,7 @@ public class SecondFragment extends Fragment {
             public void onClick(View view) {
                 timerViewModel.stopTimer();
 
-                gardenViewModel.setPlantStatus(GardenTileStatusEnum.DEAD);
-                Random random = new Random();
-                int position = random.nextInt(gardenViewModel.getSize());
-                gardenViewModel.increaseOccupated();
-                gardenViewModel.setPositionToPlant(position);
+                gardenViewModel.addPlant(GardenTileStatusEnum.DEAD);
 
                 Navigation.findNavController(view).navigate(R.id.action_SecondFragment_to_FirstFragment);
             }
@@ -79,11 +76,7 @@ public class SecondFragment extends Fragment {
                 timerViewModel.stopTimer();
                 Toast.makeText(requireParentFragment().getContext(), "Great, new plant in your garden was born", Toast.LENGTH_LONG).show();
 
-                gardenViewModel.setPlantStatus(GardenTileStatusEnum.LIVE);
-                Random random = new Random();
-                int position = random.nextInt(gardenViewModel.getSize());
-                gardenViewModel.increaseOccupated();
-                gardenViewModel.setPositionToPlant(position);
+                gardenViewModel.addPlant(GardenTileStatusEnum.LIVE);
 
                 Navigation.findNavController(view).navigate(R.id.action_SecondFragment_to_FirstFragment);
             }
