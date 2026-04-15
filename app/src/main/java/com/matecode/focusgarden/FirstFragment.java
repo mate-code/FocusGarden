@@ -1,6 +1,7 @@
 package com.matecode.focusgarden;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,12 +14,17 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
+import androidx.room.Room;
 
 import com.google.android.material.timepicker.MaterialTimePicker;
 import com.google.android.material.timepicker.TimeFormat;
 import com.matecode.focusgarden.Category.CategoryViewModel;
+import com.matecode.focusgarden.DataBase.AppDatabase;
+import com.matecode.focusgarden.DataBase.User;
+import com.matecode.focusgarden.DataBase.UserDao;
 import com.matecode.focusgarden.databinding.FragmentFirstBinding;
 
+import java.util.List;
 import java.util.Locale;
 import java.util.logging.Logger;
 
@@ -50,6 +56,24 @@ public class FirstFragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        // Temp DB setup, for test only
+        AppDatabase db = Room.databaseBuilder(
+                requireActivity(),
+                AppDatabase.class,
+                "my-database"
+        ).build();
+
+        new Thread(() -> {
+            User user = new User();
+            user.name = "John";
+            user.age = 25;
+
+            db.userDao().insert(user);
+            List<User> users = db.userDao().getAll();
+            Log.println(Log.DEBUG, "DB", users.get(0).id + " - " + users.get(0).name + " - " + users.get(0).age);
+        }).start();
+
 
         timerViewModel = new ViewModelProvider(requireActivity()).get(TimerViewModel.class);
         selectedCategory = new ViewModelProvider(requireActivity()).get(CategoryViewModel.class);
