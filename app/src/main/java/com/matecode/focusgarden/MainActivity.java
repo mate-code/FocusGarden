@@ -6,6 +6,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.util.Log;
 import android.view.View;
 
 import androidx.navigation.NavController;
@@ -14,10 +15,15 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.matecode.focusgarden.databinding.ActivityMainBinding;
+import com.matecode.focusgarden.db.AppDatabase;
+import com.matecode.focusgarden.db.user.User;
+import com.matecode.focusgarden.db.user.UserRepository;
 
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,6 +42,19 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);  // must be reach by ID because it is not a View object
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();    // build navbar config
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);     // apply config into navbar
+
+        // PoC
+        /*AppDatabase db = AppDatabase.getInstance(getApplicationContext());
+        UserRepository userRepo = new UserRepository(db.userDao());
+
+        new Thread(() -> {
+            User user = new User("John", "AlaMaKota123");
+            userRepo.insert(user);
+            List<User> users = userRepo.getAll();
+            Log.println(Log.DEBUG, "DB", users.get(0).getId() + " - " + users.get(0).getUsername() + " - " + users.get(0).getPasswordHash());
+        }).start();
+
+        AppDatabase.deleteDataBase(getApplicationContext());*/
 
     }
 

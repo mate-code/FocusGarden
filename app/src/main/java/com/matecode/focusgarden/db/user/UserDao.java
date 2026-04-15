@@ -1,4 +1,4 @@
-package com.matecode.focusgarden.DataBase;
+package com.matecode.focusgarden.db.user;
 
 import androidx.room.Dao;
 import androidx.room.Insert;
@@ -14,4 +14,7 @@ public interface UserDao {
 
     @Query("SELECT * FROM User")
     List<User> getAll();
+
+    @Query("DELETE FROM User")
+    void deleteAll();
 }
