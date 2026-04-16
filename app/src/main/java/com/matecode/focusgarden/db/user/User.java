@@ -27,6 +27,13 @@ public class User {
         this.passwordHash = PasswordUtils.hashPassword(passwordRaw);
     }
 
+    // This constructor only for test purpose
+    public User(@NonNull String id, String username, String passwordRaw) {
+        this.id = id;
+        this.username = username;
+        this.passwordHash = PasswordUtils.hashPassword(passwordRaw);
+    }
+
     @NonNull
     public String getId() { return id; }
     public String getUsername() { return username; }
