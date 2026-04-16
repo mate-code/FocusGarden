@@ -17,6 +17,7 @@ import androidx.navigation.Navigation;
 import com.google.android.material.timepicker.MaterialTimePicker;
 import com.google.android.material.timepicker.TimeFormat;
 import com.matecode.focusgarden.Category.CategoryViewModel;
+import com.matecode.focusgarden.db.user.UserDao;
 import com.matecode.focusgarden.databinding.FragmentFirstBinding;
 
 import java.util.Locale;
