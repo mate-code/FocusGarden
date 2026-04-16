@@ -17,6 +17,8 @@ public class UserRepository {
         return userDao.getAll();
     }
 
+    public User getUserByName(String name) { return userDao.getUserByName(name); }
+
     public void deleteAll() {
         userDao.deleteAll();
     }

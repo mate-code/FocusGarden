@@ -43,18 +43,24 @@ public class MainActivity extends AppCompatActivity {
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();    // build navbar config
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);     // apply config into navbar
 
-        // PoC
-        /*AppDatabase db = AppDatabase.getInstance(getApplicationContext());
+
+        AppDatabase db = AppDatabase.getInstance(getApplicationContext());
         UserRepository userRepo = new UserRepository(db.userDao());
 
         new Thread(() -> {
-            User user = new User("John", "AlaMaKota123");
-            userRepo.insert(user);
-            List<User> users = userRepo.getAll();
-            Log.println(Log.DEBUG, "DB", users.get(0).getId() + " - " + users.get(0).getUsername() + " - " + users.get(0).getPasswordHash());
+            String username = "TestUser";
+            User user = userRepo.getUserByName(username);
+            if(user != null) {
+                Log.println(Log.DEBUG, "DB - Get Event", user.getId() + " - " + user.getUsername() + " - " + user.getPasswordHash());
+            } else {
+                user = new User(username, "TestUserPassword123");
+                userRepo.insert(user);
+                List<User> users = userRepo.getAll();
+                Log.println(Log.DEBUG, "DB - Create Event", users.get(0).getId() + " - " + users.get(0).getUsername() + " - " + users.get(0).getPasswordHash());
+            }
         }).start();
 
-        AppDatabase.deleteDataBase(getApplicationContext());*/
+        //AppDatabase.deleteDataBase(getApplicationContext());
 
     }
 
