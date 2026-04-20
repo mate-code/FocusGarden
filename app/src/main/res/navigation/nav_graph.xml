@@ -44,6 +44,22 @@
         <action
             android:id="@+id/action_GardenFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
+
+        <action
+            android:id="@+id/action_GardenFragment_to_StatisticsFragment"
+            app:destination="@id/StatisticsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/StatisticsFragment"
+        android:name="com.matecode.focusgarden.statistics.StatisticsFragment"
+        android:label="@string/statistics_fragment_label"
+        tools:layout="@layout/fragment_statistics">
+
+        <action
+            android:id="@+id/action_StatisticsFragment_to_GardenFragment"
+            app:destination="@id/GardenFragment" />
+
     </fragment>
 
     <fragment

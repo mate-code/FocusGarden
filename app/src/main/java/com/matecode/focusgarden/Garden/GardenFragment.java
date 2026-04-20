@@ -59,6 +59,13 @@ public class GardenFragment extends Fragment {
             }
         });
 
+        binding.btnShowStats.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Navigation.findNavController(view).navigate(R.id.action_GardenFragment_to_StatisticsFragment);
+            }
+        });
+
 
         gardenViewModel.getGardenMapForObservers().observe(getViewLifecycleOwner(), gardenMapList -> {
             adapter.setItems(gardenMapList); // refresh that tile in RecyclerView

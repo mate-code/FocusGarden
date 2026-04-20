@@ -1,12 +1,16 @@
 package com.matecode.focusgarden.db.session;
 
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+@Entity
 public class Session {
     @PrimaryKey
+    @NonNull
     private String id;
     private String categoryId;
     private String userID;
@@ -18,8 +22,26 @@ public class Session {
         this.id = UUID.randomUUID().toString();
     }
 
+    public Session(String categoryId, String userID, Long sessionStart, Long sessionEnd, boolean interrupted) {
+        this();
+        this.categoryId = categoryId;
+        this.userID = userID;
+        this.sessionStart = sessionStart;
+        this.sessionEnd = sessionEnd;
+        this.interrupted = interrupted;
+    }
 
+    // This constructor only for test purpose
+    public Session(@NonNull String id, String categoryId, String userID, Long sessionStart, Long sessionEnd, boolean interrupted) {
+        this.id = id;
+        this.categoryId = categoryId;
+        this.userID = userID;
+        this.sessionStart = sessionStart;
+        this.sessionEnd = sessionEnd;
+        this.interrupted = interrupted;
+    }
 
+    @NonNull
     public String getId() {return id; }
     public String getCategoryId() { return categoryId; }
     public String getUserID() { return userID; }
