@@ -1,10 +1,12 @@
 package com.matecode.focusgarden.db.category;
 
 import androidx.annotation.NonNull;
+import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import java.util.UUID;
 
+@Entity
 public class Category {
     @PrimaryKey
     @NonNull

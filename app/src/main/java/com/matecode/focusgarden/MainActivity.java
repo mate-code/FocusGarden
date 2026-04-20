@@ -47,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
         AppDatabase db = AppDatabase.getInstance(getApplicationContext());
         UserRepository userRepo = new UserRepository(db.userDao());
 
+        //AppDatabase.deleteDataBase(getApplicationContext());
+
         new Thread(() -> {
             String username = "TestUser";
             User user = userRepo.getUserByName(username);
@@ -59,8 +61,6 @@ public class MainActivity extends AppCompatActivity {
                 Log.println(Log.DEBUG, "DB - Create Event", users.get(0).getId() + " - " + users.get(0).getUsername() + " - " + users.get(0).getPasswordHash());
             }
         }).start();
-
-        //AppDatabase.deleteDataBase(getApplicationContext());
 
     }
 

@@ -15,6 +15,7 @@
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
     <string name="garden_fragment_label">Your garden today</string>
+    <string name="statistics_fragment_label">Your statistics</string>
     <string name="category_fragment_label">Select your focus category</string>
     <string name="garden_sv_placeholder">Garden ScrollView</string>
     <string name="next">Next</string>

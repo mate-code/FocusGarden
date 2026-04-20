@@ -20,7 +20,10 @@ import com.matecode.focusgarden.db.user.UserRepository;
 import java.util.concurrent.Executors;
 
 
-@Database(entities = {User.class}, version = 1)
+@Database(
+        entities = {User.class, Session.class, Category.class},
+        version = 1
+)
 public abstract class AppDatabase extends RoomDatabase {
     private static volatile AppDatabase INSTANCE;
     private static final String DB_NAME = "FocusGardenDataBase";

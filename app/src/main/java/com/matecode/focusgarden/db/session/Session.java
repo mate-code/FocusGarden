@@ -1,11 +1,13 @@
 package com.matecode.focusgarden.db.session;
 
 import androidx.annotation.NonNull;
+import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+@Entity
 public class Session {
     @PrimaryKey
     @NonNull

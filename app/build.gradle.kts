@@ -55,4 +55,7 @@ dependencies {
     implementation("org.mindrot:jbcrypt:0.4")
 
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.4")
+
+    implementation("com.github.PhilJay:MPAndroidChart:3.1.0")
+
 }
