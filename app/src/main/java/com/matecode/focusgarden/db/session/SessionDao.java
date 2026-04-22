@@ -14,6 +14,9 @@ public interface SessionDao {
     @Query("SELECT * FROM Session")
     List<Session> getAll();
 
+    @Query("SELECT * FROM Session WHERE userID = :userId")
+    List<Session> getUserSessions(String userId);
+
     @Query("DELETE FROM Session")
     void deleteAll();
 }

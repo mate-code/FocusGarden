@@ -17,6 +17,7 @@ import com.matecode.focusgarden.db.user.User;
 import com.matecode.focusgarden.db.user.UserDao;
 import com.matecode.focusgarden.db.user.UserRepository;
 
+import java.io.File;
 import java.util.concurrent.Executors;
 
 
@@ -36,12 +37,19 @@ public abstract class AppDatabase extends RoomDatabase {
         if (INSTANCE == null) {     // avoid locking when instance already exists, for fast performance
             synchronized (AppDatabase.class) {
                 if (INSTANCE == null) {     // prevents multiple instance creation
-                    Log.println(Log.DEBUG, "DB Creation", "Creating DataBase, first initialization");
                     INSTANCE = Room.databaseBuilder(
                             context.getApplicationContext(),
                             AppDatabase.class,
                             DB_NAME
                     ).build();
+                    Log.println(Log.DEBUG, AppDatabase.class.getSimpleName(), "DB instance was created");
+
+                    if (!doesDatabaseExists(context)) { // if database file do not exists in phone memory, seed some default data
+                        seedUser();
+                        seedCategory();
+                        seedSession();
+                        Log.println(Log.DEBUG, AppDatabase.class.getSimpleName(), "DB was seed with default data");
+                    }
                 }
             }
         }
@@ -80,6 +88,15 @@ public abstract class AppDatabase extends RoomDatabase {
     public static void deleteDataBase(Context context) {
         context.deleteDatabase(DB_NAME);
         INSTANCE = null;
+    }
+
+    private static boolean doesDatabaseExists(Context context) {
+        File dbFile = context.getDatabasePath(DB_NAME);
+        return dbFile.exists();
+    }
+
+    public static String getDatabaseName() {
+        return DB_NAME;
     }
 
 }

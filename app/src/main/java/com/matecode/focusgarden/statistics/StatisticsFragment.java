@@ -1,6 +1,7 @@
 package com.matecode.focusgarden.statistics;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,8 +17,15 @@ import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
+import com.matecode.focusgarden.db.AppDatabase;
+import com.matecode.focusgarden.db.session.Session;
+import com.matecode.focusgarden.db.session.SessionRepository;
+import com.matecode.focusgarden.db.user.User;
+import com.matecode.focusgarden.db.user.UserDao;
+import com.matecode.focusgarden.db.user.UserRepository;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class StatisticsFragment extends Fragment {
     private FragmentStatisticsBinding binding;
@@ -31,6 +39,19 @@ public class StatisticsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        new Thread(() -> {
+            AppDatabase db = AppDatabase.getInstance(requireContext());
+
+            UserRepository userRepo = new UserRepository(db.userDao());
+            User user = userRepo.getUserById("0-0-0");
+
+            SessionRepository sessionRepo = new SessionRepository(db.sessionDao());
+            List<Session> userSessions = sessionRepo.getUserSessions("0-0-0");
+
+            Log.println(Log.DEBUG, StatisticsFragment.class.getSimpleName(), "DB data were loaded");
+
+        }).start();
 
         BarChart barChart = binding.barChart;
 

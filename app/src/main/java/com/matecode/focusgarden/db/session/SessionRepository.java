@@ -20,6 +20,8 @@ public class SessionRepository {
         return sessionDao.getAll();
     }
 
+    public List<Session> getUserSessions(String userId) { return sessionDao.getUserSessions(userId); }
+
     public void deleteAll() {
         sessionDao.deleteAll();
     }
