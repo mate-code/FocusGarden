@@ -20,6 +20,7 @@ import com.github.mikephil.charting.data.BarDataSet;
 import com.matecode.focusgarden.db.AppDatabase;
 import com.matecode.focusgarden.db.session.Session;
 import com.matecode.focusgarden.db.session.SessionRepository;
+import com.matecode.focusgarden.db.session.SessionWithCategory;
 import com.matecode.focusgarden.db.user.User;
 import com.matecode.focusgarden.db.user.UserDao;
 import com.matecode.focusgarden.db.user.UserRepository;
@@ -47,7 +48,8 @@ public class StatisticsFragment extends Fragment {
             User user = userRepo.getUserById("0-0-0");
 
             SessionRepository sessionRepo = new SessionRepository(db.sessionDao());
-            List<Session> userSessions = sessionRepo.getUserSessions("0-0-0");
+            List<Session> userSessions = sessionRepo.getUserSessions(user.getId());
+            List<SessionWithCategory> userSessionsWithCategories = sessionRepo.getUserSessionsWithCategories(user.getId());
 
             Log.println(Log.DEBUG, StatisticsFragment.class.getSimpleName(), "DB data were loaded");
 

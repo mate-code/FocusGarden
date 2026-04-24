@@ -17,6 +17,14 @@ public interface SessionDao {
     @Query("SELECT * FROM Session WHERE userID = :userId")
     List<Session> getUserSessions(String userId);
 
+    @Query("SELECT s.sessionStart, s.sessionEnd," +
+            " c.name AS categoryName, c.color AS categoryColor FROM " +
+            " Session AS s" +
+            " INNER JOIN Category AS c" +
+            " ON s.categoryId = c.id" +
+            " WHERE userID = :userId")
+    List<SessionWithCategory> getUserSessionsWithCategories(String userId);
+
     @Query("DELETE FROM Session")
     void deleteAll();
 }
