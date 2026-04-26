@@ -18,6 +18,9 @@ public interface UserDao {
     @Query("SELECT * FROM User WHERE username = :name")
     User getUserByName(String name);
 
+    @Query("SELECT * FROM User WHERE id = :id")
+    User getUserById(String id);
+
     @Query("DELETE FROM User")
     void deleteAll();
 }

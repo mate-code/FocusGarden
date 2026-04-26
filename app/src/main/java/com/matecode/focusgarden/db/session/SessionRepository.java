@@ -1,8 +1,5 @@
 package com.matecode.focusgarden.db.session;
 
-import com.matecode.focusgarden.db.user.User;
-import com.matecode.focusgarden.db.user.UserDao;
-
 import java.util.List;
 
 public class SessionRepository {
@@ -19,6 +16,10 @@ public class SessionRepository {
     public List<Session> getAll() {
         return sessionDao.getAll();
     }
+
+    public List<Session> getUserSessions(String userId) { return sessionDao.getUserSessions(userId); }
+
+    public List<SessionWithCategory> getUserSessionsWithCategories(String userId) { return sessionDao.getUserSessionsWithCategories(userId); }
 
     public void deleteAll() {
         sessionDao.deleteAll();
