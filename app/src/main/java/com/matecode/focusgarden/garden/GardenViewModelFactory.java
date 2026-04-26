@@ -1,4 +1,4 @@
-package com.matecode.focusgarden.Garden;
+package com.matecode.focusgarden.garden;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;

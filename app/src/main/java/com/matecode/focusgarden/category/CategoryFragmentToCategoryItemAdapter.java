@@ -1,4 +1,4 @@
-package com.matecode.focusgarden.Category;
+package com.matecode.focusgarden.category;
 
 import android.view.LayoutInflater;
 import android.view.View;

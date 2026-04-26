@@ -14,7 +14,7 @@ import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.matecode.focusgarden.R;
-import com.matecode.focusgarden.Utils.CalculateMinutesPerHour;
+import com.matecode.focusgarden.utils.CalculateMinutesPerHour;
 import com.matecode.focusgarden.databinding.FragmentStatisticsBinding;
 
 import com.github.mikephil.charting.charts.BarChart;
@@ -26,7 +26,6 @@ import com.matecode.focusgarden.db.session.Session;
 import com.matecode.focusgarden.db.session.SessionRepository;
 import com.matecode.focusgarden.db.session.SessionWithCategory;
 import com.matecode.focusgarden.db.user.User;
-import com.matecode.focusgarden.db.user.UserDao;
 import com.matecode.focusgarden.db.user.UserRepository;
 
 import java.util.ArrayList;

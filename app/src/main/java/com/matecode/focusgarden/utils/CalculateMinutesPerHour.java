@@ -1,4 +1,4 @@
-package com.matecode.focusgarden.Utils;
+package com.matecode.focusgarden.utils;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;

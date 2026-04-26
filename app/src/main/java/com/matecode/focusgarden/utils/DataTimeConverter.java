@@ -1,4 +1,4 @@
-package com.matecode.focusgarden.Utils;
+package com.matecode.focusgarden.utils;
 
 import androidx.room.TypeConverter;
 import java.time.LocalDateTime;

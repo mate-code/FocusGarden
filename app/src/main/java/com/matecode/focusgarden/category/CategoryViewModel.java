@@ -1,4 +1,4 @@
-package com.matecode.focusgarden.Category;
+package com.matecode.focusgarden.category;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;

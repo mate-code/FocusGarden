@@ -1,4 +1,4 @@
-package com.matecode.focusgarden.Garden;
+package com.matecode.focusgarden.garden;
 
 import android.util.Log;
 

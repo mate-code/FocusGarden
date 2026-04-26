@@ -1,4 +1,4 @@
-package com.matecode.focusgarden.Utils;
+package com.matecode.focusgarden.utils;
 
 import org.mindrot.jbcrypt.BCrypt;
 
