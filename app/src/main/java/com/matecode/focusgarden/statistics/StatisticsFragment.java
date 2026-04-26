@@ -10,7 +10,11 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.matecode.focusgarden.R;
+import com.matecode.focusgarden.Utils.CalculateMinutesPerHour;
 import com.matecode.focusgarden.databinding.FragmentStatisticsBinding;
 
 import com.github.mikephil.charting.charts.BarChart;
@@ -26,7 +30,9 @@ import com.matecode.focusgarden.db.user.UserDao;
 import com.matecode.focusgarden.db.user.UserRepository;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class StatisticsFragment extends Fragment {
     private FragmentStatisticsBinding binding;
@@ -53,26 +59,42 @@ public class StatisticsFragment extends Fragment {
 
             Log.println(Log.DEBUG, StatisticsFragment.class.getSimpleName(), "DB data were loaded");
 
+            Map<String, List<BarEntry>> dataEntries = new HashMap<>();
+            Map<String, Integer> nameAndColor = new HashMap<>();
+            for (SessionWithCategory userCategoryWithSession: userSessionsWithCategories) {
+                dataEntries.putIfAbsent(userCategoryWithSession.getCategoryName(), new ArrayList<BarEntry>());
+                nameAndColor.putIfAbsent(userCategoryWithSession.getCategoryName(), userCategoryWithSession.getCategoryColor());
+                Map<Integer, Integer> dict = CalculateMinutesPerHour.calculate(userCategoryWithSession.getSessionStart(), userCategoryWithSession.getSessionEnd());
+                for (Map.Entry<Integer, Integer> entry: dict.entrySet()){
+                    dataEntries.get(userCategoryWithSession.getCategoryName()).add(new BarEntry(entry.getKey(), entry.getValue()));
+                }
+            }
+
+            List<BarDataSet> sets = new ArrayList<BarDataSet>();
+            for (Map.Entry<String, List<BarEntry>> entry: dataEntries.entrySet()) {
+                BarDataSet set = new BarDataSet(entry.getValue(), entry.getKey());
+                int color = nameAndColor.getOrDefault(entry.getKey(), 0);
+                set.setColor(color);
+                sets.add(set);
+            }
+
+            BarChart barChart = binding.barChart;
+
+            XAxis xAxis = barChart.getXAxis();
+            YAxis yAxis = barChart.getAxisLeft();
+            yAxis.setAxisMinimum(0);
+            yAxis.setAxisMaximum(60);
+            xAxis.setAxisMinimum(0f);
+            xAxis.setAxisMaximum(24f);
+            xAxis.setGranularity(1f);
+            xAxis.setGranularityEnabled(true);
+            xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+
+            BarData barData = new BarData(sets.toArray(new IBarDataSet[0]));
+            barChart.setData(barData);
+            barChart.invalidate();
+
         }).start();
-
-        BarChart barChart = binding.barChart;
-
-        // Sample data
-        ArrayList<BarEntry> entries = new ArrayList<>();
-        entries.add(new BarEntry(1, 10));
-        entries.add(new BarEntry(2, 20));
-        entries.add(new BarEntry(3, 15));
-        entries.add(new BarEntry(4, 30));
-
-        // Dataset
-        BarDataSet dataSet = new BarDataSet(entries, "My Data");
-
-        // Final data
-        BarData barData = new BarData(dataSet);
-        barChart.setData(barData);
-
-        // Refresh chart
-        barChart.invalidate();
 
 
         binding.btnBack.setOnClickListener(new View.OnClickListener(){
