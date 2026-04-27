@@ -1,4 +1,6 @@
-package com.matecode.focusgarden.utils;
+package com.matecode.focusgarden.statistics;
+
+import com.matecode.focusgarden.utils.DataTimeConverter;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;

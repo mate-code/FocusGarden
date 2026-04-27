@@ -1,6 +1,8 @@
 package com.matecode.focusgarden.statistics;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +16,6 @@ import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.matecode.focusgarden.R;
-import com.matecode.focusgarden.utils.CalculateMinutesPerHour;
 import com.matecode.focusgarden.databinding.FragmentStatisticsBinding;
 
 import com.github.mikephil.charting.charts.BarChart;
@@ -22,19 +23,24 @@ import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.matecode.focusgarden.db.AppDatabase;
-import com.matecode.focusgarden.db.session.Session;
 import com.matecode.focusgarden.db.session.SessionRepository;
 import com.matecode.focusgarden.db.session.SessionWithCategory;
 import com.matecode.focusgarden.db.user.User;
 import com.matecode.focusgarden.db.user.UserRepository;
+import com.matecode.focusgarden.utils.AppExecutor;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 public class StatisticsFragment extends Fragment {
     private FragmentStatisticsBinding binding;
+
+    private final Executor executor = Executors.newSingleThreadExecutor();
+    private final Handler mainHandler = new Handler(Looper.getMainLooper());
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -46,14 +52,37 @@ public class StatisticsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        new Thread(() -> {
+
+        AppExecutor.io(() -> {
+
             AppDatabase db = AppDatabase.getInstance(requireContext());
 
             UserRepository userRepo = new UserRepository(db.userDao());
             User user = userRepo.getUserById("0-0-0");
 
             SessionRepository sessionRepo = new SessionRepository(db.sessionDao());
-            List<Session> userSessions = sessionRepo.getUserSessions(user.getId());
+            List<SessionWithCategory> userSessionsWithCategories = sessionRepo.getUserSessionsWithCategories(user.getId());
+
+            Log.println(Log.DEBUG, StatisticsFragment.class.getSimpleName(), "DB data were loaded");
+
+            AppExecutor.main(() -> {
+
+                List<ChartDataPoint> chartDataPoints = RawDataToChartDataMapper.map(userSessionsWithCategories);
+
+                ChartStrategy barChart = ChartStrategyFactory.create(ChartType.BAR);
+                barChart.render(binding.barChart, chartDataPoints);
+
+            });
+        });
+
+
+        /*new Thread(() -> {
+            AppDatabase db = AppDatabase.getInstance(requireContext());
+
+            UserRepository userRepo = new UserRepository(db.userDao());
+            User user = userRepo.getUserById("0-0-0");
+
+            SessionRepository sessionRepo = new SessionRepository(db.sessionDao());
             List<SessionWithCategory> userSessionsWithCategories = sessionRepo.getUserSessionsWithCategories(user.getId());
 
             Log.println(Log.DEBUG, StatisticsFragment.class.getSimpleName(), "DB data were loaded");
@@ -93,7 +122,7 @@ public class StatisticsFragment extends Fragment {
             barChart.setData(barData);
             barChart.invalidate();
 
-        }).start();
+        }).start();*/
 
 
         binding.btnBack.setOnClickListener(new View.OnClickListener(){
