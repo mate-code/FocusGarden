@@ -6,7 +6,7 @@
 Forest App -> https://www.forestapp.cc/
 
 ### Live Demo
-https://github.com/user-attachments/assets/ce8e4496-1be2-4d3e-8ac3-56be6ded8cc9
+https://github.com/user-attachments/assets/d6d1ce01-d894-4a8c-86b1-168cb00c478a
 
 ### Screenshots
 <img width="270" height="600" alt="Screenshot_20260428-135701 FocusGarden" src="https://github.com/user-attachments/assets/df1d18b4-4a3f-4dde-b6b5-6a3c077cd4bb" align="left" />
