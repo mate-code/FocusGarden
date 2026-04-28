@@ -1,4 +1,4 @@
-package com.matecode.focusgarden.Garden;
+package com.matecode.focusgarden.garden;
 
 import android.content.Context;
 import android.util.AttributeSet;

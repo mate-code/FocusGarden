@@ -1,4 +1,4 @@
-<com.matecode.focusgarden.Garden.GardenTileImageView
+<com.matecode.focusgarden.garden.GardenTileImageView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/imageView"
     android:layout_width="match_parent"

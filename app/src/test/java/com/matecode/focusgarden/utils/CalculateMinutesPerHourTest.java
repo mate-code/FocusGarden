@@ -1,8 +1,10 @@
-package com.matecode.focusgarden.Utils;
+package com.matecode.focusgarden.utils;
 
 import org.junit.Test;
 
 import static org.junit.Assert.*;
+
+import com.matecode.focusgarden.statistics.CalculateMinutesPerHour;
 
 import java.util.HashMap;
 import java.util.Map;

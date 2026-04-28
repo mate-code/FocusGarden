@@ -1,4 +1,4 @@
-package com.matecode.focusgarden.Utils;
+package com.matecode.focusgarden.utils;
 
 import android.graphics.Color;
 

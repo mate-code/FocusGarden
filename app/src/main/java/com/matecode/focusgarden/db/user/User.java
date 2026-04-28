@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import com.matecode.focusgarden.Utils.PasswordUtils;
+import com.matecode.focusgarden.utils.PasswordUtils;
 
 import java.util.UUID;
 

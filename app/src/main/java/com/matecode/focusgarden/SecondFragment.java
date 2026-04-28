@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-import android.util.Log;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
@@ -13,10 +12,10 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
-import com.matecode.focusgarden.Category.CategoryViewModel;
-import com.matecode.focusgarden.Garden.GardenTileStatusEnum;
-import com.matecode.focusgarden.Garden.GardenViewModel;
-import com.matecode.focusgarden.Garden.GardenViewModelFactory;
+import com.matecode.focusgarden.category.CategoryViewModel;
+import com.matecode.focusgarden.garden.GardenTileStatusEnum;
+import com.matecode.focusgarden.garden.GardenViewModel;
+import com.matecode.focusgarden.garden.GardenViewModelFactory;
 import com.matecode.focusgarden.databinding.FragmentSecondBinding;
 
 import java.util.Locale;
