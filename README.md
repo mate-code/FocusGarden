@@ -2,6 +2,9 @@
 
 ## Current App Status - Development process (28.04.2026)
 
+### Description
+FocusGarden is an app designed to help users focus on tasks of their choice using the Pomodoro Technique. The app is currently in development as a portfolio project and for personal use. The goal of the project is to gain proficiency in the Java programming language and to implement as many different design patterns as possible. Future plans include an external database, individual user accounts, and releasing the app on the Google Play Store.
+
 ### Inspiration
 Forest App -> https://www.forestapp.cc/
 
